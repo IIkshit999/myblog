@@ -57,5 +57,3 @@ function sorting()
 
     document.getElementById("display_name_without_commas").innerHTML = remove_commas;
 }
-
-
