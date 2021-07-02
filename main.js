@@ -1,59 +1,36 @@
 
-name_of_the_student_array = [];
-    
-function submit()
+var mouseEvent = "empty";
+var last_position_of_x, last_position_of_y;
+canvas = document.getElementById('myCanvas');
+ctx = canvas.getContext("2d"); color = "black";
+width_of_line = 1;
+canvas.addEventListener("mousedown", my_mousedown);
+function my_mousedown(e) 
 {
-    var display_student_array = [];
-
-    for (var j = 1; j <= 4; j++) 
-    {
-        var name_of_the_student = document.getElementById("name_of_the_student_"+j).value;
-        console.log(name_of_the_student);
-        name_of_the_student_array.push(name_of_the_student);
-    }
-
-    console.log(name_of_the_student_array);
-
-    var lenght_of_name_of_students_array = name_of_the_student_array.length;
-    console.log(lenght_of_name_of_students_array);
-
-    for (var k = 0; k < lenght_of_name_of_students_array; k++) 
-    {
-        display_student_array.push("<h4>NAME - "+ name_of_the_student_array[k] + "</h4>");
-        console.log(display_student_array);
-    }
-
-    console.log(display_student_array);
-    document.getElementById("display_name_with_commas").innerHTML = display_student_array;
-
-    var remove_commas = display_student_array.join(" ");
-    console.log(remove_commas);
-    document.getElementById("display_name_without_commas").innerHTML = remove_commas;
-
-
-    document.getElementById("submit_button").style.display = "none";
-    document.getElementById("sort_button").style.display = "inline-block";
-
+    color = document.getElementById("color").value;
+    width_of_line = document.getElementById("width_of_line").value;
+   mouseEvent = "mouseDown"; }
+canvas.addEventListener("mousemove", my_mousemove);
+function my_mousemove(e) 
+{ 
+    current_position_of_mouse_x = e.clientX - canvas.offsetLeft;
+    current_position_of_mouse_y = e.clientY - canvas.offsetTop;
+    if (mouseEvent == "mouseDown") 
+    { 
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width_of_line;
+        console.log("Lastposition of x and y coordinates = ");
+        console.log("x = " + last_position_of_x + "y = " + last_position_of_y);
+        ctx.moveTo(last_position_of_x,last_position_of_y);
+console.log("Currentposition of x and y coordinates = ");
+console.log("x= " + current_position_of_mouse_x + "y = " + current_position_of_mouse_y);
+ctx.lineTo(current_position_of_mouse_x,current_position_of_mouse_y);
+ctx.stroke();
 }
-
-function sorting()
-{
-    name_of_the_student_array.sort();
-    console.log(name_of_the_student_array);
-
-    var display_student_array_sorting = [];
-
-    var lenght_of_name_of_students_array = name_of_the_student_array.length;
-    console.log(lenght_of_name_of_students_array);
-
-    for (var k = 0; k < lenght_of_name_of_students_array; k++) 
-    {
-        display_student_array_sorting.push("<h4>NAME - " + name_of_the_student_array[k] + "</h4>");
-        console.log(display_student_array_sorting);
-    }
-
-    var remove_commas = display_student_array_sorting.join(" ");
-    console.log(remove_commas);
-
-    document.getElementById("display_name_without_commas").innerHTML = remove_commas;
-}
+ last_position_of_x = current_position_of_mouse_x;
+ last_position_of_y = current_position_of_mouse_y;
+} canvas.addEventListener("mouseup", my_mouseup);
+function clearArea() { ctx.clearRect(0, 0, ctx.canvas.width,
+ctx.canvas.height);
+}v
